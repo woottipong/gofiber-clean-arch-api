@@ -18,8 +18,6 @@ This is a sample RESTful API built with GoFiber and following the Clean Architec
 │   │   └── user.go
 │   ├── usecase
 │   │   └── user.go
-│   ├── router
-│   │   └── user.go
 │   └── infrastructure
 │       ├── database.go
 │       └── fiber.go
