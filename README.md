@@ -48,6 +48,6 @@ The cmd directory still holds the main.go file, which is responsible for setting
 - `DELETE /users/:id`: delete a user by ID
 
 ## Dependencies
-- Fiber: web framework
-- go-sql-driver/mysql: MySQL driver for Go
-- validator: github.com/go-playground/validator/v10
+- `Fiber`: web framework
+- `go-sql-driver/mysql`: MySQL driver for Go
+- `validator`: github.com/go-playground/validator/v10
