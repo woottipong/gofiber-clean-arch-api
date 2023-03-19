@@ -18,10 +18,11 @@ func NewUserHandler(userUseCase usecase.UserUseCase, route fiber.Router) {
 	}
 
 	// Declare routing endpoints
-	route.Post("/user", handler.CreateUser)
-	route.Get("/user/:id", handler.GetUserByID)
-	route.Put("/user/:id", handler.UpdateUser)
-	route.Delete("/user/:id", handler.DeleteUser)
+	user := route.Group("/user")
+	user.Post("/", handler.CreateUser)
+	user.Get("/:id", handler.GetUserByID)
+	user.Put("/:id", handler.UpdateUser)
+	user.Delete("/:id", handler.DeleteUser)
 }
 
 func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
