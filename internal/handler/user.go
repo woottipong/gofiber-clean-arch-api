@@ -3,6 +3,7 @@ package handler
 import (
 	"golang-clean-arch-api/internal/entity"
 	"golang-clean-arch-api/internal/usecase"
+	"golang-clean-arch-api/pkg/validator"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -27,10 +28,16 @@ func NewUserHandler(userUseCase usecase.UserUseCase, route fiber.Router) {
 
 func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
 	var user entity.User
-
 	if err := c.BodyParser(&user); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": "invalid request body",
+			"error":   err.Error(),
+		})
+	}
+
+	if err := validator.ValidateStruct(user); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "validation failed",
 			"error":   err.Error(),
 		})
 	}
