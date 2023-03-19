@@ -1,0 +1,15 @@
+FROM golang:1.20-alpine
+
+ENV TZ=Asia/Bangkok
+
+WORKDIR /app
+
+RUN go install github.com/acoshift/goreload@latest
+
+ADD . .
+
+RUN go mod download
+
+WORKDIR /app/cmd/api
+
+CMD ["goreload", "main.go"]
