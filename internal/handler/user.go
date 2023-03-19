@@ -12,7 +12,6 @@ type UserHandler struct {
 	userUseCase usecase.UserUseCase
 }
 
-// route fiber.Router,
 func NewUserHandler(userUseCase usecase.UserUseCase, route fiber.Router) {
 	handler := &UserHandler{
 		userUseCase: userUseCase,
