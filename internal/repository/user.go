@@ -43,23 +43,25 @@ func (r *userRepository) GetByID(id string) (*entity.User, error) {
 }
 
 func (r *userRepository) GetAll() ([]*entity.User, error) {
-	// query := "SELECT id, name, email, password FROM users"
-	// 	rows := ur.db.QueryRow(query)
-	// 	defer rows.Close()
+	query := "SELECT id, name, email FROM users"
+	rows, err := r.db.Query(query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
 
-	// 	for rows.Next() {
-	// 		user := &entity.User{}
-	// 		err := rows.Scan(&user.ID, &user.Name, &user.Email, &user.Password)
-	// 		if err != nil {
-	// 			return nil, err
-	// 		}
-	// 		users = append(users, user)
-	// 	}
-	// 	if err = rows.Err(); err != nil {
-	// 		return nil, err
-	// 	}
 	var users []*entity.User
-
+	for rows.Next() {
+		user := &entity.User{}
+		err := rows.Scan(&user.ID, &user.Name, &user.Email)
+		if err != nil {
+			return nil, err
+		}
+		users = append(users, user)
+	}
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
 	return users, nil
 }
 

@@ -19,8 +19,9 @@ func NewUserHandler(userUseCase usecase.UserUseCase, route fiber.Router) {
 	}
 
 	// Declare routing endpoints
-	user := route.Group("/user")
+	user := route.Group("/users")
 	user.Post("/", handler.CreateUser)
+	user.Get("/", handler.GetAll)
 	user.Get("/:id", handler.GetUserByID)
 	user.Put("/:id", handler.UpdateUser)
 	user.Delete("/:id", handler.DeleteUser)
@@ -52,6 +53,20 @@ func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"message": "user created successfully",
+	})
+}
+
+func (h *UserHandler) GetAll(c *fiber.Ctx) error {
+	data, err := h.userUseCase.GetAll()
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "failed to create user",
+			"error":   err.Error(),
+		})
+	}
+
+	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
+		"data": data,
 	})
 }
 
