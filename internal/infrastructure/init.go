@@ -32,6 +32,7 @@ func Initial(cfg *config.Config) {
 
 	// Initialize HTTP handlers and router
 	handler.NewUserHandler(userUseCase, v1)
+	handler.NewBookHandler(v1)
 
 	// Start server
 	err = app.Listen(fmt.Sprintf("%s:%s", cfg.Server.Host, cfg.Server.Port))

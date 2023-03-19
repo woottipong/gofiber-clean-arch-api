@@ -65,7 +65,7 @@ func (h *UserHandler) GetAll(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"data": data,
 	})
 }
