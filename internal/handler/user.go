@@ -12,10 +12,16 @@ type UserHandler struct {
 }
 
 // route fiber.Router,
-func NewUserHandler(userUseCase usecase.UserUseCase) *UserHandler {
-	return &UserHandler{
+func NewUserHandler(userUseCase usecase.UserUseCase, route fiber.Router) {
+	handler := &UserHandler{
 		userUseCase: userUseCase,
 	}
+
+	// Declare routing endpoints
+	route.Post("/user", handler.CreateUser)
+	route.Get("/user/:id", handler.GetUserByID)
+	route.Put("/user/:id", handler.UpdateUser)
+	route.Delete("/user/:id", handler.DeleteUser)
 }
 
 func (h *UserHandler) CreateUser(c *fiber.Ctx) error {

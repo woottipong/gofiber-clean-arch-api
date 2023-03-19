@@ -31,6 +31,5 @@ This is a sample RESTful API built with GoFiber and following the Clean Architec
 - `entity`: holds the code for the application's entities, which represent the core business logic of the application.
 - `repository`: holds the code for accessing the database and managing data persistence.
 - `usecase`: holds the code for implementing the business logic of the application.
-- `router`: definition of the HTTP routes
 - `infrastructure`: holds the code for initializing the database and web framework.
 The cmd directory still holds the main.go file, which is responsible for setting up the dependencies an

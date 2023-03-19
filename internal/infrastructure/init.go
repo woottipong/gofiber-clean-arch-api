@@ -3,8 +3,8 @@ package infrastructure
 import (
 	"fmt"
 	"golang-clean-arch-api/config"
+	"golang-clean-arch-api/internal/handler"
 	"golang-clean-arch-api/internal/repository"
-	"golang-clean-arch-api/internal/router"
 	"golang-clean-arch-api/internal/usecase"
 	"log"
 )
@@ -28,10 +28,10 @@ func Initial(cfg *config.Config) {
 
 	// Create dependencies
 	userRepository := repository.NewUserRepository(db)
-	userService := usecase.NewUserUseCase(userRepository)
+	userUseCase := usecase.NewUserUseCase(userRepository)
 
 	// Initialize HTTP handlers and router
-	router.UserRoutes(v1, userService)
+	handler.NewUserHandler(userUseCase, v1)
 
 	// Start server
 	err = app.Listen(fmt.Sprintf("%s:%s", cfg.Server.Host, cfg.Server.Port))
