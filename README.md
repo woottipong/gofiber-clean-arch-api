@@ -33,3 +33,21 @@ This is a sample RESTful API built with GoFiber and following the Clean Architec
 - `usecase`: holds the code for implementing the business logic of the application.
 - `infrastructure`: holds the code for initializing the database and web framework.
 The cmd directory still holds the main.go file, which is responsible for setting up the dependencies an
+
+## Usage
+1. Clone this repository
+2. `cd gofiber-clean-arch-api`
+3. `docker-compose up -d`
+4. Send HTTP requests to `[POST] localhost:5000/v1/users`
+
+## API Endpoints
+- `GET /users`: get all users
+- `POST /users`: create a new user
+- `GET /users/:id`: get a user by ID
+- `PUT /users/:id`: update an existing user by ID
+- `DELETE /users/:id`: delete a user by ID
+
+## Dependencies
+- Fiber: web framework
+- go-sql-driver/mysql: MySQL driver for Go
+- validator: github.com/go-playground/validator/v10
